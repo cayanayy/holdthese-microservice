@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: item-service
+  datasource:
+    username: postgres
+    password: topsecret
+    url: jdbc:postgresql://localhost:5432/holdthese
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+eureka:
+  client:
+    service-url: { "defaultZone": http://localhost:8761/eureka }
+server:
+  port: 0
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+management:
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0
